@@ -4,7 +4,7 @@ Interactive web application that simulates and visualizes circular q-shift opera
 
 ## 🔗 Live Deployment
 
-**Live URL:** _[Add your deployed URL here]_
+**Live URL:** mesh-shift-visualizer-iota.vercel.app
 
 ## Features
 
