@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Interactive visualizer for circular q-shift operations on 2D mesh topology in parallel computing. Animate row and column shifts with complexity analysis.">
+    <title>Mesh Circular Shift Visualizer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔀</text></svg>">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header">
+            <h1>Mesh Circular Shift Visualizer</h1>
+            <p class="subtitle">Interactive 2D mesh topology — circular q-shift with step-by-step animation</p>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+
+            <!-- Sidebar: Controls + Complexity -->
+            <aside class="sidebar">
+
+                <!-- Control Panel -->
+                <div class="glass-card">
+                    <div class="card-title"><span class="icon">⚙️</span> Control Panel</div>
+
+                    <div class="control-group">
+                        <label for="p-select">Number of Processors (p)</label>
+                        <select id="p-select"></select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="q-input">Shift Amount (q)</label>
+                        <input type="number" id="q-input" min="1" max="15" value="5" placeholder="Enter q value">
+                        <div id="q-validation" class="validation-msg"></div>
+                    </div>
+
+                    <button id="run-btn" class="btn-primary">
+                        <span class="spinner"></span>
+                        <span class="btn-text">Run Circular Shift</span>
+                    </button>
+
+                    <!-- Stage Progress -->
+                    <div class="stage-indicator">
+                        <span class="stage-dot" id="dot-initial"></span>
+                        <span class="stage-label" id="label-initial">Initial</span>
+                        <span style="color:var(--text-muted);margin:0 0.2rem">→</span>
+                        <span class="stage-dot" id="dot-stage1"></span>
+                        <span class="stage-label" id="label-stage1">Row</span>
+                        <span style="color:var(--text-muted);margin:0 0.2rem">→</span>
+                        <span class="stage-dot" id="dot-stage2"></span>
+                        <span class="stage-label" id="label-stage2">Col</span>
+                    </div>
+                </div>
+
+                <!-- Complexity Panel -->
+                <div class="glass-card complexity-section">
+                    <div class="card-title"><span class="icon">📊</span> Complexity Analysis</div>
+                    <div id="complexity-content">
+                        <div class="empty-state" style="min-height:200px">
+                            <p style="color:var(--text-muted)">Run a shift to see analysis</p>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Mesh Visualization Area -->
+            <main class="mesh-area">
+                <div class="glass-card mesh-section">
+                    <div class="card-title"><span class="icon">🔲</span> Mesh Grid Visualization</div>
+                    <div id="mesh-content">
+                        <div class="empty-state">
+                            <div class="empty-icon">🔀</div>
+                            <h3>No Shift Computed Yet</h3>
+                            <p>Select values for p and q, then click <strong>Run Circular Shift</strong> to visualize
+                                the data movement.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div><!-- /main-layout -->
+
+    </div><!-- /app-container -->
+
+    <!-- Scripts -->
+    <script src="/components/ControlPanel.js"></script>
+    <script src="/components/MeshGrid.js"></script>
+    <script src="/components/ComplexityPanel.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            ControlPanel.init((data) => {
+                MeshGrid.render(data);
+                ComplexityPanel.update(data.complexity);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

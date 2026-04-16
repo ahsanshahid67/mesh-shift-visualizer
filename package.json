@@ -1,0 +1,11 @@
+{
+  "name": "mesh-shift-visualizer",
+  "version": "1.0.0",
+  "description": "Interactive visualizer for circular q-shift on 2D mesh topology",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "python src/App.py"
+  },
+  "author": "",
+  "license": "MIT"
+}
